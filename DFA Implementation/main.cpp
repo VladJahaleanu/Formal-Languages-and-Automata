@@ -15,22 +15,17 @@ int main()
     char litera_crt;
 
     bool st_finala;
-
     vector <int> finale;
-
     vector <string> cuv1;
-
     vector <int> traseu;
-
     string cuvinte;
-
     stack <int> st;
 
     f >> nodes >> transitions;
 
     char dfa[nodes][nodes];
 
-    for(i = 0;i <= transitions; i++)
+    for(i = 0; i <= transitions; i++)
     {
         f >> this_node >> next_node;
         f >> dfa[this_node][next_node];             ///punem tranzitiile in matricea de adiacenta
@@ -55,7 +50,7 @@ int main()
 
 
     f>>nr_cuv;
-    while(nr_cuv!=0)
+    while(nr_cuv != 0)
     {
         f>>cuvinte;
         cuv1.push_back(cuvinte);                   ///stocam cuvintele intr-un vector
@@ -68,26 +63,22 @@ int main()
             st.pop();
 
         st_finala = false;
-
         cuvinte = cuv1[x];
-
         litera_crt = cuvinte[0];            ///retinem prima litera din cuvant
-
         st.push(initiala);
-
         this_node = st.top();               ///initializam nodul curent cu varful stivei(starea initiala)
 
         traseu.clear();
 
         traseu.push_back(initiala);
 
-        i=0;
-        while(i<nodes)
+        i = 0;
+        while(i < nodes)
         {
             if(dfa[this_node][i] != '#' && litera_crt == dfa[this_node][i])         ///daca gasim o tranzitie favorabila, trecem nodul urmator in stiva,
             {                                                                       ///stergem prima litera din cuvant(cea de care aveam nevoie),
                 st.push(i);                                                         ///actualizam litera curenta, actualizam nodul curent si actualizam traseul
-                for(j = 0;j < cuvinte.length(); j++)
+                for(j = 0; j < cuvinte.length(); j++)
                         cuvinte[j] = cuvinte[j+1];
                 litera_crt = cuvinte[0];
                 this_node = i;
@@ -97,7 +88,7 @@ int main()
             else i++;
         }
 
-        for(j = 0;j < finale.size(); j++)                                  ///ultimul nod favorabil va ramane memorat in this_node si verificam daca este stare finala
+        for(j = 0; j < finale.size(); j++)                                  ///ultimul nod favorabil va ramane memorat in this_node si verificam daca este stare finala
             if(finale[j] == this_node)
                 st_finala = true;
 
@@ -105,7 +96,7 @@ int main()
             {
                 cout<<"DA"<<endl;
                 cout<<"TRASEU: ";
-                for(int k = 0;k < traseu.size(); k++)                      ///afisarea traseului daca inputul este acceptat
+                for(int k = 0; k < traseu.size(); k++)                      ///afisarea traseului daca inputul este acceptat
                     cout<<traseu[k]<<" ";
                 cout<<endl;
             }
